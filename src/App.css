@@ -25,6 +25,10 @@ body {
   padding-top: 4rem;
 }
 
+hr {
+  display: none;
+}
+
 /* Overwrite toastify styles */
 .toast {
   width: 70%;
@@ -64,36 +68,10 @@ section {
   margin-top: 5rem;
   background: white;
   width: 90vw;
-  max-width: 50rem;
+  max-width: 60rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.action-message {
-  font-size: clamp(0.8rem, 3vw, 1.5rem);
-  letter-spacing: 1px;
-  width: 100%;
-  text-align: center;
-  text-transform: capitalize;
-  border-radius: 5px;
-  padding: 0.2rem 0;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: all 500ms ease-in-out;
-}
-
-.action-message.success {
-  background: var(--success);
-  opacity: 1;
-  visibility: visible;
-}
-
-.action-message.danger {
-  background: var(--error);
-  opacity: 1;
-  visibility: visible;
 }
 
 .grocery-form {
@@ -265,29 +243,35 @@ h4 {
 }
 
 @media(min-width: 1024px) {
+  html {
+    font-size: 110%;
+  }
+  
+  svg {
+    font-size: 1.5rem;
+  }
+  
   section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr min-content 1fr;
     grid-template-rows: 1fr;
-
-  }
-
-  .grocery-form {
-    margin: 0;
     position: relative;
   }
 
-  .action-message {
-    width: 90%;
+   hr {
+     display: block;
+     height: 100%;
+     width: .2rem;
+     rotate: 180deg;
+     border: none;
+     background: #DDDDDD;
+     margin-inline: 1rem;
+   }
+   
+  .grocery-form {
+    grid-column: 1 /2;
+    align-self: start;
+    margin: 0;
   }
-
-  .grocery-form::before {
-    content: "";
-    width: 2px;
-    height: 90%;
-    background: lightgray;
-    position: absolute;
-    right: 0;
-    margin: 0 1rem;
-  }
+  
 }

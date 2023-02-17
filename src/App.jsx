@@ -140,6 +140,8 @@ function App() {
       <section>
         <AddItemForm toastMessage={toastMessage} onAddItem={addItemHandler} editItem={editItemObj} onEditItem={editItemHandler} />
         
+        <hr />
+        
         {todos.length === 0 && <p>No item found.</p>}
       
         {todos.length !== 0 && <div className="list-container" data-list-container>
