@@ -2,6 +2,7 @@ export default function AddItemForm({ toastMessage, onAddItem, editItem, onEditI
 
   function onSubmitHandler(e) {
     e.preventDefault();
+    
     const inputValue = e.target.input;
 
     if (editItem.isEditing) {

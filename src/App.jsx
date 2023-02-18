@@ -80,16 +80,24 @@ function App() {
     dispatchTodos({ type: 'ADD_ITEM', value: item });
   }
 
-  const getEditItem = function(id, value) {
+  function getEditTodo(e) {
+    const itemContainer = e.target.closest('.item-container');
+    const editBtn = e.target.closest('.edit-btn');
+    const todo = itemContainer.querySelector('.todo-text');
+
+    if (!(itemContainer && editBtn)) return
+
     setEditItemObj({
-      id,
-      value,
+      id: todo.dataset.id,
+      value: todo.textContent,
       isEditing: true
     })
   }
 
   const editItemHandler = function(id, value) {
     dispatchTodos({ type: 'EDIT_ITEM', id, value });
+    
+    //reset the values
     setEditItemObj({
       id: '',
       value: '',
@@ -98,6 +106,7 @@ function App() {
   }
 
   const deleteItemHandler = function(id) {
+    toastMessage('Item deleted!', 'error');
     dispatchTodos({ type: 'DELETE_ITEM', id })
   }
 
@@ -132,7 +141,6 @@ function App() {
     }
   }
 
-
   return (
     <main>
       <Toast />
@@ -144,11 +152,14 @@ function App() {
         
         {todos.length === 0 && <p>No item found.</p>}
       
-        {todos.length !== 0 && <div className="list-container" data-list-container>
-        
-        <ItemsList getEditItem={getEditItem} onDelete={deleteItemHandler} todos={todos} />
-          <button  onClick={clearAllHandler} type="button" className='clear-btn'>Clear All</button>
-        </div>}
+        {
+          todos.length !== 0 &&
+          <div onClick={getEditTodo} className="list-container" data-list-container>
+          
+            <ItemsList onDelete={deleteItemHandler} todos={todos} />
+            <button  onClick={clearAllHandler} type="button" className='clear-btn'>Clear All</button>
+          </div>
+        }
       </section>
     </main>
   )
